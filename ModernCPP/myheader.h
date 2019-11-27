@@ -310,10 +310,16 @@ void howToUseReference(void) {
 	constReferenceTest(rnum);
 }
 
+/*
+howToUseNew
+new를 상용해서 동적할당하는 방법
+*/
 void howToUseNew(int x) {
-	int* ptr = new int[x];
-	for (int i = 0; i < x; i++) {
-		ptr[i] = i * 10;
+	int* ptr = new int[3];
+	ptr[0] = 10;
+	ptr[1] = 20;
+	ptr[2] = 30;
+	for (int i = 0; i < 3; i++) {
 		cout << *(ptr + i) << "\n";
 	}
 }

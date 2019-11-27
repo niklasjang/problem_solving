@@ -25,12 +25,14 @@ https://blog.naver.com/niklasjang 의 C++ 문법 정리를 보고 cpp reference가 될만한
 */
 #include <iostream> //표준 헤더 : 표준 헤더파일(C의 표준에서 정의하고 있는, 기본적으로 제공되는 헤더파일)이 저장되어 있는 디렉터리
 #ifndef __SIMPLE_CONCEPTS_H__
+#define __SIMPLE_CONCEPTS_H__
 #include "simpleConcepts.h" //사용자 정의 헤더 : 기본적으로 소스코드와 같은 경로에 위치함
 //#include "./simpleConcepts.h"  //상대주소
 //#include "D:\problem_solving\ModernCPP\simpleConcepts.h" //절대주소 
 #endif
 
 #ifndef __CLASS_CONCEPTS_H__
+#define __CLASS_CONCEPTS_H__
 #include "classConcepts.h"
 #endif
 /*
@@ -43,9 +45,9 @@ extern 키워드
 2. Increment 함수가 외부에 선언되어있음을 알린다.
 3. 함수의 경우 extern 선언을 생략할 수 있다.
 */
-extern int externInt;
-extern int externFunctionTest ();
-int exterFunctinoTest2();
+//extern int externInt;
+//extern int externFunctionTest ();
+//int exterFunctinoTest2();
 
 /*
 static 키워드
@@ -99,8 +101,6 @@ int main(void) {
 	//howToUserEnum();
 
 	//Reference 참조자	
-	//howToUseReference();
-
-	/*----class Concepts----*/
+	//howToUseNew(3);
 	return 0;
 }
