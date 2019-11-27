@@ -1,4 +1,4 @@
-﻿  main.cpp
-D:\problem_solving\ModernCPP\simpleConcepts.h(157,14): warning C4305:  '초기화 중': 'int'에서 'bool'(으)로 잘립니다.
-D:\problem_solving\ModernCPP\simpleConcepts.h(158,16): warning C4305:  '초기화 중': 'double'에서 'bool'(으)로 잘립니다.
+﻿  basicCppMain.cpp
+D:\problem_solving\ModernCPP\simpleConcepts.h(181,14): warning C4305:  '초기화 중': 'int'에서 'bool'(으)로 잘립니다.
+D:\problem_solving\ModernCPP\simpleConcepts.h(182,16): warning C4305:  '초기화 중': 'double'에서 'bool'(으)로 잘립니다.
   ModernCPP.vcxproj -> D:\problem_solving\ModernCPP\x64\Debug\ModernCPP.exe

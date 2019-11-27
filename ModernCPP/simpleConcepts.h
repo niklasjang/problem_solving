@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 #define SQUARE(x) ((x)*(x))
@@ -24,6 +25,21 @@ void howToPrintString(void) {
 	cout << "char형 배열의 마지막 원소는 널문자이므로 9개의 문자만 입력받을 수 있습니다." << endl;
 	cin >> str;
 	cout << str << "\n";
+
+	/*1. const string ㅣiteral
+	string literal은 c에서는 char array, cpp에서는 const char array
+	*/
+	const char* str2 = "I am niklasjang"; //char*로 적을꺼면 꼭 const char*로 적어야 한다.
+	char str3[] = "I am niklasjang"; //char []로 적을꺼면 const를 붙히지 않아도 된다. 
+	for (int i = 0; i < 3; i++) cout << str2[i] << "\n";
+	//str2[0] = 'z'; error
+	for (int i = 0; i < 3; i++) cout << str3[i] << "\n";
+	str3[0] = 'z';
+	cout << str2 << "\n";
+	cout << str3 << "\n";
+	/*
+	2. string
+	*/
 }
 
 /*
@@ -85,7 +101,17 @@ void howToUseMacro(void) {
 inline 함수 : 함수의 inline화를 컴파일러가 처리.
 컴파일러는 함수의 인라인화가 오히려 성능에 해가 된다고 판단할 경우, 이 키워드를 무시하기도 한다.
 또한 컴파일러는 필요한 경우 일부 함수를 임의로 인라인 처리하기도 한다.
-특징 : 전달되는 인자에 type이 있는데, 이를 template를 사용해서 보완할 수 있다.
+특징1 : 전달되는 인자에 type이 있는데, 이를 template를 사용해서 보완할 수 있다.
+특징2 :  inline 함수는 해당 함수가 호출된 곳에서 함수의 몸체로 대체되어야하는데  
+car.cpp에서 inline으로 만들어 버리면 main.cpp에서 inline 함수를 찾을 수 없다.
+
+전처리기?
+- 전처리기는 컴파일이 진행되기 전에 전처리 operation을 수행한다.
+- 하지만 사실 전처리 과정을 진행하기 전에 compiler가 먼저 소스코드파일을 준비시킨다.
+
+1. compiler : 필요없는 \(줄바꿈)을 제거해서 전처리기가 논리적인 단위로 코드를 볼 수 있도록 한다.
+2. 전처리기 : 주석을 제거하고, 메크로를  호출된 부분에 대체하고, 헤더파일을 가져오고, text적인 오류를 검사한다.
+* 전처리기가 실행되는 것은 compiler가 이를 컴파일 하기 전의 단계로 호출했기 때문이다. 
 */
 template <class T>
 inline void howToUseInline(T x) {
@@ -311,9 +337,15 @@ void howToUseReference(void) {
 }
 
 void howToUseNew(int x) {
-	int* ptr = new int[x];
+	int* arrPtr = new int[x];
 	for (int i = 0; i < x; i++) {
-		ptr[i] = i * 10;
-		cout << *(ptr + i) << "\n";
+		arrPtr[i] = i * 10;
+		cout << *(arrPtr + i) << "\n";
 	}
+	delete[] arrPtr;
+	double* ptr = new double;
+	*ptr = 10.02;
+	cout << *ptr << "\n";
+	delete ptr;
 }
+

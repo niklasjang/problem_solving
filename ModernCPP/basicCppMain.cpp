@@ -35,6 +35,11 @@ https://blog.naver.com/niklasjang 의 C++ 문법 정리를 보고 cpp reference가 될만한
 #define __CLASS_CONCEPTS_H__
 #include "classConcepts.h"
 #endif
+
+#ifndef __COPY__CONSTRUCTOR_H__
+#define __COPY__CONSTRUCTOR_H__
+#include "copyConstructor.h"
+#endif
 /*
 extern 키워드
 의미
@@ -57,11 +62,10 @@ static 키워드
 */
 static int staticInt = 0;
 
-int main(void) {
-	/*----simpleConcepts----*/
+void simpleConcepts(void) {
 	//문자열 입출력
-	//howToPrintString();
-	
+	howToPrintString();
+
 	//함수 오버로딩
 	//functionOverLoadingExample(1);
 	//functionOverLoadingExample(1, 2);
@@ -74,7 +78,7 @@ int main(void) {
 
 	//매크로 사용법
 	//howToUseMacro();
-	
+
 	//inline 함수 사용법
 	//howToUseInline(1);
 	//howToUseInline('a');
@@ -100,7 +104,47 @@ int main(void) {
 	//enum
 	//howToUserEnum();
 
-	//Reference 참조자	
+	//Reference 참조자
+	//howToUseReference();
+
+	//new 동적할당
 	//howToUseNew(3);
+}
+
+
+void classConcepts(void) {
+	//Structure
+	//howToUserStructure();
+	//howToUserStructureWithEnum();
+
+	//Class
+	//howToUserClassWithEnum();
+
+	//getter setter pattern
+	//const function
+	//howToUseConstFunction();
+
+	//Encapsulation
+	//whatIsEncapsulation();
+
+	//Constructor
+	//Memberinitializer 
+	//객체 배열의 user defined constructor
+	//howToUseConstructor();
+
+	//자신을 return하는 클래스
+	//howToUserSelfReturnClass();
+}
+
+int main(void) {
+	/*----simpleConcepts----*/
+	//simpleConcepts();
+
+	/*----classConcepts----*/
+	//classConcepts();
+
+	/*----copyConstructor----*/
+	//howToUseCopyConstructor();
+	//TODO whatIsDeepCopy();
 	return 0;
 }
