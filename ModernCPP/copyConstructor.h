@@ -78,26 +78,104 @@ void howToUseCopyConstructor(void) {
 	CopyConstructorClass sc4(sc1); // sc3 = sc1를 sc4(sc1)으로 묵시적 변환하는 것을 막는 것이지, copy 생성자를 호출하는 것은 가능하다.
 }
 
+
+/*
+얕은 복사 깊은 복사
+
+얕은 복사 : 객체가 가진 맴버들을의 값을 새로운 객체로 복사하는데 만약 객체가 참조타입의 멤버를 가지고 있다면
+참조값만 복사됩니다. 즉, 같은 메모리를 가리키는 참조값을 복사된 객체도 가지게 됩니다.
+이는 복사 전의 객체의 맴버를 수정하면 복사된 객체의 맴버도 수정되는 특정을 가집니다.
+
+깊은 복사 : 객체가 가진 맴버들들의 값을 새로운 객체로 복사할 때 참조되는 객체 자체도 복사가 됩니다.
+따라서 복사 이전의 객체의 맴버를 수정해도 복사된 객체의 맴버에는 영향을 주지 않습니다. 
+*/
 class CopyConstWithString {
 private:
-	char* str1;
-	char str2[30];
-	string str3;
+	const char* constStr;
+	char* charStr;
+	string stringStr;
 public:
-	CopyConstWithString(char* _str1, char* _str2, string _str3) {
-		/*this->str1 = _str1;
-		strcpy(str2, _str2);
-		str3 = _str3;
-		cout << str1 << "\n";
-		cout << str2 << "\n";
-		cout << str3 << "\n";*/
+	/*
+	shallow copy
+	*/
+	CopyConstWithString(const char* _constrStr, char* _charStr, string _stringStr) {
+		constStr = _constrStr;
+		charStr = _charStr;
+		stringStr = _stringStr;
+	}
+	/*
+	depp copy : 참조되는 객체를 new로 새로 만들고 내용을 복사하기
+	*/
+	CopyConstWithString(const CopyConstWithString& copy) {
+		constStr = copy.constStr;
+		charStr = new char[strlen(copy.charStr + 1)];
+		strcpy(charStr, copy.charStr);
+		stringStr = copy.stringStr;
+	}
+	void printStr(void) {
+		cout << constStr << "\n";
+		cout << charStr<< "\n";
+		cout << stringStr << "\n";
+	}
+	void setConstStr(const char* _constStr) {
+		constStr = _constStr;
+	}
+	void setCharStr(char* _charStr) {
+		strcpy(charStr, _charStr);
+	}
+	void setStringStr(string _stringStr) {
+		stringStr = _stringStr;
+	}
+	
+	CopyConstWithString returnThis(void) {
+		return (CopyConstWithString )*this;
+	}
+	CopyConstWithString returnCopyObject(CopyConstWithString param) {
+		return param;
 	}
 };
-//
-//void whatIsDeepCopy(void) {
-//	char* str1 = "niklas";
-//	char str2[30];
-//	string str3;
-//	cin >> str2 >> str3;
-//	CopyConstWithString cs(str1, str2, str3);
-//}
+
+void whatIsDeepCopy(void) {
+	//깊은 복사 & 얕은 복사
+	const char* constStr = "niklas";
+	char charStr[30] = "charString";
+	string stringStr("stringStr");
+	CopyConstWithString cs(constStr, charStr, stringStr);
+	CopyConstWithString objA(constStr, charStr, string("stringStr"));
+	CopyConstWithString objB(objA);
+	objA.printStr();
+	objB.printStr();
+	cout << "\n";
+	objA.setConstStr("setConstStr");
+	char charStr2[30] = "setCharStr2";
+	objA.setCharStr(charStr2); //copy constructor는 deep copy로 정의해서 값을 바꿔도 영향이 없다.
+	objA.setStringStr(string("setStringStr"));
+	cout << "\n";
+	objA.printStr();
+	objB.printStr();
+	cout << "\n";
+	cin >> charStr;
+	objA.printStr(); //objA의 기본 생성자는 shallowcopy이기 때문에 charStr를 바꾸면 값이 바뀐다.
+	cout << "\n";
+
+	//복사 생성자의 호출 시점 세 가지
+	CopyConstWithString ccsA(constStr, charStr, stringStr);
+	CopyConstWithString ccsB(ccsA); //1. 기본 copy 생성자
+
+	CopyConstWithString ccsC = ccsB.returnCopyObject(ccsA); //2. ccsA를 param으로 전달할 때 호출
+	//                       <-- 3. returnCopyObject의 return을 ccsC에 넣을 때 호출
+	/*
+	함수가 값을 반환하면, 별도의 메모리 공간이 할당되고, 
+	이 공간에 반환 값이 저장된다.(반환 값으로 초기화된다.) <-- 이 떄는 저장일 뿐 copy 호출되지 않음.
+	이렇게 저장된 값을 ccsC에 assign할 때는 copy constructor가 호출됨. 
+	*/
+}
+
+
+void whatIsTemporaryobject(void) {
+	const char* constStr = "niklas";
+	char charStr[30] = "charString";
+	string stringStr("stringStr");
+	CopyConstWithString (constStr, charStr, stringStr); //임시객체 생성
+	CopyConstWithString copyedObject  = CopyConstWithString(constStr, charStr, stringStr).returnThis();
+}

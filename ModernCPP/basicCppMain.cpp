@@ -40,6 +40,11 @@ https://blog.naver.com/niklasjang 의 C++ 문법 정리를 보고 cpp reference가 될만한
 #define __COPY__CONSTRUCTOR_H__
 #include "copyConstructor.h"
 #endif
+
+#ifndef __INHERITANCE_H__
+#define __INHERITANCE_H__
+#include "inheritanceConcepts.h"
+#endif
 /*
 extern 키워드
 의미
@@ -145,6 +150,20 @@ int main(void) {
 
 	/*----copyConstructor----*/
 	//howToUseCopyConstructor();
-	//TODO whatIsDeepCopy();
+	//whatIsDeepCopy();
+
+	/*임시객체*/
+	//whatIsTemporaryobject();
+
+	/*friend class*/
+	//howToUseFriendClass();
+
+	/*static	*/
+	//howToUseStatic();
+
+
+	/*inheritance*/
+	//whatIsInheritance();
+	whatIsInheritance2();
 	return 0;
 }

@@ -27,3 +27,26 @@ int solution(int n) {
     len = n;
     return foo(0,0);
 }
+
+
+/*
+sum을 사용하지 않고 왼쪽 괄호/오른쪽 괄호의 갯수로 푼 경우
+*/
+#include <string>
+#include <vector>
+
+using namespace std;
+int len = 0;
+int foo(int left, int right){
+    if(left < right) return 0;
+    if(left + right == 2 * len){
+        if(left == right) return 1;
+        else return 0;
+    }
+    return foo(left+1, right) + foo(left, right+1);
+}
+
+int solution(int n) {
+    len = n;
+    return foo(0,0);
+}
